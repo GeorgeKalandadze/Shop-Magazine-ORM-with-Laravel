@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->timestamps();
+            $table->string('token',64)->unique();
+            $table->decimal('total_price');
+            $table->enum('status',['active','inactive'])->default('active');
         });
     }
 
